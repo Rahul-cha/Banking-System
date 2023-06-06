@@ -1,0 +1,42 @@
+﻿@model UserDetails
+
+<html>
+<title>
+    Withdraw
+</title>
+<body>
+
+    <form method="post" onsubmit="validateForm()">
+
+        <div id="myForm">
+
+         @foreach (var receiversaccount in ViewBag.ObjUserDetails)
+            {
+
+                <option value="@receiversaccount.Account_Id">@Convert.ToInt32(ViewBag.receivers_accounts.IndexOf(receiversaccount)+1)  @receiversaccount.Account_Type - @receiversaccount.Balance 
+                
+                    
+                </option>
+            }
+
+
+
+            }
+
+        </select>
+
+        </div>
+
+        <input asp-for=Balance type="text" placeholder="account id" id="ta" required>
+
+        <input name="receiversId" type="number" value="@ViewBag.receiversid" hidden />
+
+        <button value="Submit"> Submit </button>
+
+    </form>
+
+
+</body>
+</html>
+
+

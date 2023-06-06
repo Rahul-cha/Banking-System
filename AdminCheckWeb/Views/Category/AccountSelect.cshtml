@@ -1,0 +1,116 @@
+﻿
+@model UserDetails
+
+
+
+<form method="post" asp-action="AccountSelect" onsubmit="validateForm()">
+
+    
+    <div id="myForm">
+        <h2> Recievers Account: </h2>
+
+        <select name="receiversaccountid">
+            @*<option value=""></option>*@
+
+
+
+
+            @foreach (var receiversaccount in ViewBag.receivers_accounts)
+            {@*
+            if (obj.LoginId == receiversaccount.Account_Id){*@
+
+                <option value="@receiversaccount.Account_Id">@Convert.ToInt32(ViewBag.receivers_accounts.IndexOf(receiversaccount)+1)  @receiversaccount.Account_Type - @receiversaccount.Balance 
+                
+                    
+                </option>
+            
+
+
+
+            }
+
+        </select>
+        }
+    </div>
+    <br />
+    <br />
+
+    <div>
+        <h2> Sender's Account: </h2>
+        <select name="senderaccountid">
+            @*<option value=""></option>*@
+            @foreach (var sendersaccounts in ViewBag.senders_accounts)
+            {
+
+                <option value="@sendersaccounts.Account_Id" > @Convert.ToInt32(ViewBag.senders_accounts.IndexOf(sendersaccounts)+1) @sendersaccounts.Account_Type  - @sendersaccounts.Balance
+                    </option>
+
+               
+            }
+        </select>
+    </div>
+
+    @*<input name="amount" type="number" />*@
+
+
+  <input asp-for=Balance type="text" placeholder="account id" id="ta" required>
+
+    <input name="sendersId" type="number" value="@ViewBag.sendersid" hidden  />
+    <input name="receiversId" type="number" value="@ViewBag.receiversid" hidden />
+
+
+  @*  <input name="sbalance" type="number" value="@sendersaccounts.Balance" />*@
+   
+    <br />
+    <br />
+    <br />
+
+    <button  value="Submit"> Submit </button>
+</form>
+@*<input type="button" onclick="validateForm()" value="Submit" />*@
+
+
+<script type="text/javascript">
+
+    function validateForm() {
+        alert ("Hello");
+
+        var SenderBalance = document.getElementById("sb").value;
+
+        var selectedaccountId = document.getElementsByName("senderaccountid").values;
+        alert(selectedaccountId);
+        var TAmount = document.getElementById("ta").value;
+
+        //alert(TAmount);
+        //alert(SenderBalance);
+
+        //if (TAmount == "") {
+        //    alert("Name must be filled out");
+        //}
+
+        if (SenderBalance <= TAmount){
+            alert("Insufficient Balance");
+        }
+        else {
+            alert("You can transfer" + SenderBalance);
+        }
+    }
+</script>
+
+// validation - ani paisa jod ghatau - db ma save
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

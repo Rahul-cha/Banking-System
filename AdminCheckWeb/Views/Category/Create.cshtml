@@ -1,0 +1,92 @@
+﻿@model Category
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary"> Create Category </h2>
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Account"></label>
+            @*<input asp-for="Account" class="form-control" />*@
+            <select id="Account" name="Account">
+                <option value="Savings">Savings</option>
+                <option value="Current">Current</option>
+                </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Balance"></label>
+            <input asp-for="Balance" class="form-control" />
+            <span asp-validation-for="Balance" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="OverDraftLimit"></label>
+            <input asp-for="OverDraftLimit" class="form-control" />
+            <span asp-validation-for="OverDraftLimit" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="InterestRate"></label>
+            <input asp-for="InterestRate" class="form-control" />
+            <span asp-validation-for="InterestRate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+       @* <div class="mb-3">
+            <label asp-for="Interest"></label>
+            <input asp-for="Interest" class="form-control" />
+        </div>*@
+        <button type="submit" class="btn btn-primary" style="width:150px"> Create</button>
+        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px"> Back to List</a>
+    </div>
+    </form>
+
+@*@model UserDetails
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary"> Create Category </h2>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Account_Type"></label>
+            <input asp-for="Account_Type" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Balance"></label>
+            <input asp-for="Balance" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Interest"></label>
+            <input asp-for="Interest" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px"> Create</button>
+        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px"> Back to List</a>
+    </div>
+</form>*@

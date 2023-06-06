@@ -1,0 +1,94 @@
+﻿
+
+
+
+
+@model UserDetails
+
+@{
+    ViewData["Title"] = "Account Select";
+}
+
+<h1>  @ViewData["Title"] </h1>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Money Transfer</title>
+    <style>
+        /* CSS styling for form */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            input[type=submit]:hover {
+                background-color: #3e8e41;
+            }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Transfer Form</h1>
+    <form method="post" asp-action="Index">
+        <label asp-for=Account_Id>Account Id:</label>
+        <input asp-for=Account_Id type="text" placeholder="Account Id" required>
+@*
+         <label asp-for="Balance">Balance:</label>
+        <input asp-for="Balance" type="text" placeholder="Balance" required>*@
+
+        <input type="submit" value="Submit">
+    </form>
+    <p> This page is used to Transfer money between the users</p>
+
+    <p><a href="@Url.Action("User", "Category")" style="text-decoration:none;">Account Details </p>
+
+</body>
+
+</html>
+

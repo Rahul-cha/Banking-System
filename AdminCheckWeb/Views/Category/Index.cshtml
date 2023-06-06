@@ -1,0 +1,75 @@
+﻿@model List<UserDetails>
+
+       @{
+    ViewData["Title"] = "Category";
+}
+
+<h1>  @ViewData["Title"] </h1>
+
+<p> This page is used to check the User's content</p>
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Category List </h2>
+        </div>
+        <div class="col-6">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Category
+            </a>
+        </div>
+    </div>
+
+<table class="table table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+                <th>Sn</th>
+            <th>Id.</th>
+            <th>Name</th>
+            <th>Descri</th>
+            <th>Account</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+                  @*<a asp-controller="Home" asp-action="Index" asp-route-id="@obj.Id">*@
+            <tr>
+                    <td width="25%">
+                            @obj.Account_Id
+                    </td>
+                <td width="25%">
+                    @obj.Account_Type
+                </td>
+              
+              @*  <td width="25%">
+                    <a asp-controller="Home" asp-action="Index" asp-route-id="@obj.Id" style="text-decoration: none;" >  @obj.Name </a>
+                </td>*@
+                
+                <td width="25%">
+                    @obj.Balance
+                </td>
+             <td width="25%">
+                    @obj.Interest
+                </td>
+            </tr>
+                
+        }
+    </tbody>
+
+    </table>
+</div>
+
+
+@*<h1>1. <a href="Admin">Customer Summary</a></h1>
+<h1>2. <a asp-page="/Index1">Financial Forecast</a></h1>*@
+   <p><a href="@Url.Action("Admin", "Category")">Admin</a> - only this one is hyper linking
+       </br>
+      <a href="@Url.Action("User", "Category")"> User Accounts</a>
+      <br />
+    <a href="@Url.Action("Demo", "Category")"> Demo Check</a>
+
+</p>
+
+@*<h1><a href="@Url.Action("Demo.cshtml", "Category")">demo</a></h1>*@

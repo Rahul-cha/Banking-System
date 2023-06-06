@@ -1,0 +1,270 @@
+﻿@model List<UserDetails>
+
+@{
+    ViewData["Title"] = "User";
+}
+<h1>  @ViewData["Title"] </h1>
+
+
+<p> Account Details</p>
+
+<table class="table table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Account Type</th>
+            <th>Account Balance</th>
+            <th>Interest</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <a asp-controller="Home" asp-action="Index" asp-route-id="@obj.">
+            <tr>
+                <td width="25%">
+                        @obj.Account_Id
+                </td>
+                <td width="25%">
+                        @obj.Account_Type
+                </td>
+                <td width="25%">
+                        @obj.Balance
+                </td>
+                <td width="25%">
+                        @obj.Interest
+                </td>
+            </tr>
+            </a>
+        }
+    </tbody>
+
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<div>
+
+    <h2> Additional Options</h2>
+    <ul>
+        <li> </li>
+        <li> <a href="@Url.Action("TransferMoney", "Category")" style="text-decoration: none;"> Money Transfer</a></li>
+
+        <li>  <p id="Transfer" onclick="Transfer()"> Pop Up </p> </li>
+    </ul>
+
+
+</div>
+
+
+<html>
+<head>
+    <title>Button Click Form</title>
+
+    <style>
+        #TransferForm {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #depositForm {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #withdrawForm {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #wp {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #dp {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+
+        <li>  <button onclick="depositForm()">Deposit Money </button></li>
+
+        <li>  <button onclick="withdrawForm()">Withdraw Money</button> </li>
+
+        <li> <button onclick="openForm()">Transfer Money</button></li>
+    </ul>
+   
+
+   
+
+   
+
+
+
+
+    <div id="TransferForm">
+        <form method="get" asp-action="AccountSelect">
+            <label>Account Id:</label>
+            <input type="number" name="receiversId" placeholder="Account Id" required>
+            <input type="number" name="sendersId" value="@Model.Select(y=>y.LoginId).FirstOrDefault()" hidden />
+
+
+            <br />
+            @*<label>Balance:</label>
+            <input type="text" name="amount" placeholder="Balance" required>*@
+
+            <button type="submit">Submit</button>
+
+
+
+            <a asp-controller="Category" asp-action="User" asp-route-uid="@Model.Select(y=>y.LoginId).FirstOrDefault()" class="btn btn-secondary" style="width:150px"> Close</a>
+
+        </form>
+    </div>
+
+
+    <div id="depositForm" class="dp">
+        <form method="post" onsubmit="validateForm()" asp-action="User">
+            <select name="receiversaccountid">
+
+                @foreach (var receiversaccount in ViewBag.receiversid)
+                {
+
+                    <option value="@receiversaccount.Account_Id">
+                        @Convert.ToInt32(ViewBag.receiversid.IndexOf(receiversaccount)+1)  @receiversaccount.Account_Type - @receiversaccount.Balance
+
+
+                    </option>
+                }
+                <select>
+
+                    <input type="number" name="DepositAmt" placeholder="Amount" required />
+                    @*<input asp-for=Balance type="text" placeholder="account id" id="ta" required>*@
+
+
+
+                    <input name="receiversid" type="number" value="@ViewBag.userid" hidden />
+                    <button type="submit">Deposit</button>
+
+                    <a asp-controller="Category" asp-action="User" asp-route-uid="@Model.Select(y=>y.LoginId).FirstOrDefault()" class="btn btn-secondary" style="width:150px">Close</a>
+        </form>
+    </div>
+
+    <div id="withdrawForm" class="wp">
+        <form method="post" asp-action="User">
+            <select name="receiversaccountid">
+
+                @foreach (var receiversaccount in ViewBag.receiversid)
+                {
+                    <option value="@receiversaccount.Account_Id">
+                        @Convert.ToInt32(ViewBag.receiversid.IndexOf(receiversaccount)+1)  @receiversaccount.Account_Type - @receiversaccount.Balance
+
+
+                    </option>
+                }
+            </select>
+            <input type="number" name="WithdrawAmt" placeholder="Amount" required />
+
+           @* <input type="number" name="DepositAmt" value="0" hidden />*@
+            <input type="number" name="receiversid"  value="@ViewBag.userid" hidden />
+            <button type="submit">Withdraw</button>
+
+            <a asp-controller="Category" asp-action="User" asp-route-uid="Model.Select(y=>y.LoginId).FirstOrDefault()" class="btn btn-secondary" style="width:150px">Close</a>
+
+            @*  @foreach (var obj in Model)
+            {
+            obj.Account_Id += 1;
+            <a asp-controller="Category" asp-action="User" asp-route-uid="@obj.LoginId" class="btn btn-secondary" style="width:150px"> Close</a>
+            } *@
+        </form>
+    </div>
+
+
+
+</body>
+<script>
+    function openForm() {
+        document.getElementById("TransferForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("TransferForm").style.display = "none";
+    }
+
+    function depositForm() {
+        document.getElementById("depositForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("depositForm").style.display = "none";
+    }
+
+    function withdrawForm() {
+        document.getElementById("withdrawForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("withdrawForm").style.display = "none";
+    }
+
+</script>
+</html>
+
+
+
+

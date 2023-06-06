@@ -1,0 +1,87 @@
+﻿@model List<UserDetails>
+
+@{
+    ViewData["Title"] = "Admin";
+}
+@*<h1>  @ViewData["Title"] </h1>*@
+
+
+
+
+<style>
+
+    #info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20vh; /* Set the height to 100% of the viewport height to center vertically */
+    }
+
+    }
+</style>
+
+<div id="info">
+
+    
+    <h1> Admin </h1>
+    <br />
+    <br />
+<p>
+    WElcome Admin, your company is going fine .............. <br /> <br /> so What would you like to check?
+</p>
+
+ <br />
+    <br />
+    <br />
+    <br />
+<ul>
+
+   
+        <li> <button>  <a href="@Url.Action("UserD", "Category")" style="text-decoration: none; color:white; "> User Details</a> </button></li>
+
+        <li>  <button> <a href="@Url.Action("FinancialForecast", "Category") " style="text-decoration: none; color:white; "> Financial Forecast </a> </button> </li>
+   
+</ul>
+
+</div>
+
+<h1> User Details</h1>
+
+<table class="table table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Account Type</th>
+            <th>Account Balance</th>
+            <th>Interest</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            @*<a asp-controller="Home" asp-action="Index" asp-route-id="@obj.">*@
+            <tr>
+                <td width="25%">
+                        @obj.Account_Id
+                </td>
+                <td width="25%">
+                        @obj.Account_Type
+                </td>
+                <td width="25%">
+                        @obj.Balance
+                </td>
+                <td width="25%">
+                        @obj.Interest
+                </td>
+            </tr>
+            @*</a>*@
+        }
+    </tbody>
+
+</table>
+
+
+</div> 
+
+            
+   
